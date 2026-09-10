@@ -1,0 +1,246 @@
+package com.angel.e_commersapp.presentation.signupscreen
+
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.angel.e_commersapp.R
+import com.angel.e_commersapp.navigation.Routes
+import com.angel.e_commersapp.presentation.auth.AuthViewModel
+import com.angel.e_commersapp.ui.theme.blue
+import com.angel.e_commersapp.util.CustomTextField
+import com.angel.e_commersapp.util.Result
+
+@Composable
+fun SignUpScreen(
+    navController: NavController,
+    viewModel: SignUpViewModel = viewModel(),
+    authViewModel: AuthViewModel = hiltViewModel()
+) {
+
+
+    var userNameAndEmail by viewModel.userNameAndEmail
+    var userPassword by viewModel.userPassword
+    var userConfPassword by viewModel.userConfPassword
+    var errorMessage by viewModel.errorMessage
+    val visible by viewModel.visible
+    val icon = if (visible) R.drawable.visibility else R.drawable.visible
+
+    val authState by authViewModel.authState.collectAsState()
+
+    LaunchedEffect(authState) {
+        when (authState) {
+            is Result.Success -> {
+                navController.navigate(Routes.LoginScreen) {
+                    popUpTo(Routes.SignUpScreen) { inclusive = true }
+                }
+                authViewModel.resetAuthState()
+            }
+
+            is Result.Failure -> {
+                errorMessage = (authState as Result.Failure).message
+            }
+
+            else -> {}
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .widthIn(max = 450.dp)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .imePadding()
+                .padding(horizontal = 16.dp, vertical = 24.dp)
+        ) {
+
+            Text(
+                "Create an\naccount",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black,
+                lineHeight = 30.sp
+            )
+
+            Spacer(Modifier.height(20.dp))
+            CustomTextField(
+                value = userNameAndEmail,
+                onValueChange = { userNameAndEmail = it },
+                placeHolder = { Text("Name/Email", color = Color.Gray) },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.user),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp), tint = Color.Gray
+                    )
+                }, modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(Modifier.height(20.dp))
+            CustomTextField(
+                value = userPassword,
+                onValueChange = { userPassword = it },
+                placeHolder = { Text("Password", color = Color.Gray) },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.padlock),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp), tint = Color.Gray
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    IconButton(onClick = { viewModel.visible.value = !viewModel.visible.value }) {
+                        Icon(
+                            painter = painterResource(icon),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp), tint = Color.Gray
+                        )
+                    }
+                },
+                visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
+            )
+            Spacer(Modifier.height(20.dp))
+
+            CustomTextField(
+                value = userConfPassword,
+                onValueChange = { userConfPassword = it },
+                placeHolder = { Text("ConfirmPassword", color = Color.Gray) },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.padlock),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp), tint = Color.Gray
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    IconButton(onClick = { visible != visible }) {
+                        Icon(
+                            painter = painterResource(icon),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp), tint = Color.Gray
+                        )
+                    }
+                },
+                visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
+            )
+
+
+            Spacer(Modifier.height(20.dp))
+            Row() {
+                Text("By clicking the ", color = Color.Gray)
+                Text("Register ", color = blue)
+                Text("button,you agree", color = Color.Gray)
+            }
+            Text("to the public offer", color = Color.Gray)
+            Spacer(Modifier.height(20.dp))
+
+            if (errorMessage != null) {
+                Text(
+                    errorMessage ?: "",
+                    color = Color.Red
+                )
+            }
+
+            Spacer(Modifier.height(40.dp))
+            Button(
+                onClick = {
+                    errorMessage = ""
+
+                    if (userNameAndEmail.isBlank()) {
+                        errorMessage = "Email is required"
+                    } else if (userPassword.isBlank()) {
+                        errorMessage = "Password is required"
+                    } else if (userConfPassword.isBlank()) {
+                        errorMessage = "Confirm password is required"
+                    } else if (userPassword != userConfPassword) {
+                        errorMessage = "Passwords don't match"
+                    } else {
+                        authViewModel.signup(userNameAndEmail, userPassword)
+
+                    }
+                },
+                modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = blue,
+                    contentColor = Color.White
+                )
+            ) {
+                Text("Create Account", fontSize = 18.sp)
+            }
+
+            Spacer(Modifier.height(50.dp))
+            Text(
+                "- Or Continue With -", color = Color.Gray, modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(Modifier.height(25.dp))
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .clickable(onClick = {}),
+                    color = Color(0xfffcf3f6),
+                    shape = CircleShape, border = BorderStroke(1.dp, color = blue)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.google),
+                        contentDescription = null,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+            Spacer(Modifier.height(40.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("I Already Have an Account ", color = Color.Gray)
+                Text(
+                    "Login",
+                    textDecoration = TextDecoration.Underline,
+                    color = blue,
+                    fontSize = 16.sp
+                )
+            }
+        }
+    }
+}
+
+//@Preview(showBackground = true, showSystemUi = true)
+//@Composable
+//fun View(modifier: Modifier = Modifier) {
+//    SignUpScreen()
+
+//}

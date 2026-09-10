@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "378417506504",
+    "project_id": "e-commers-app-3ad71",
+    "storage_bucket": "e-commers-app-3ad71.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378417506504:android:c7e34813f224b76f465dfd",
+        "android_client_info": {
+          "package_name": "com.angel.e_commersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378417506504-194atopoosgn150m2cmn1e0g1nqt94tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.angel.e_commersapp",
+            "certificate_hash": "de695341938ec235143a2bee9c270534987123f0"
+          }
+        },
+        {
+          "client_id": "378417506504-q5r7755v1rrp8kejetapaso9d9h4fsi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtXXPG3oU1xVi3JSAhCwH3TgK0BSFcyBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378417506504-q5r7755v1rrp8kejetapaso9d9h4fsi0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
