@@ -175,14 +175,14 @@ fun ProductScreen(
                     Icon(
                         Icons.Default.Search,
                         contentDescription = null,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp), tint = Color(0xffbbbbbb)
                     )
                 }, trailingIcon = {
                     IconButton(onClick = { navController.navigate(Routes.SearchScreen)}) {
                         Icon(
                             Icons.Default.Mic,
                             contentDescription = null,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(20.dp), tint = Color(0xffbbbbbb)
                         )
                     }
                 }, shape = RoundedCornerShape(8.dp),
@@ -192,7 +192,7 @@ fun ProductScreen(
                     disabledContainerColor = Color.White,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
+                    disabledIndicatorColor = Color.Transparent,
                 ), enabled = false, readOnly = true
             )
             BannerPager()

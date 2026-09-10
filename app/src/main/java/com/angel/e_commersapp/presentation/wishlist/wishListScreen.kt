@@ -225,7 +225,7 @@ fun WishlistScreen(
                         Text(
                             text = "${state.filteredProducts.size} ${if (state.filteredProducts.size == 1) "Item" else "Items"}",
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium, color = Color.Gray
                         )
                         if (searchQuery.isNotEmpty()) {
                             Text(

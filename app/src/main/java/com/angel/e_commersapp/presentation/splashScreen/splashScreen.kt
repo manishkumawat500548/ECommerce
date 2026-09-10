@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.angel.e_commersapp.R
 import com.angel.e_commersapp.fontBold
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 
 @Composable
@@ -40,10 +41,12 @@ fun SplashScreen(isLoading:Boolean, onFinish : () -> Unit) {
         animationSpec = tween(3000)
     )
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(isLoading) {
         startAnimation = true
-        delay(4000)
+        if (!isLoading){
+        delay(4000.milliseconds)
         onFinish()
+        }
     }
 
     Box(

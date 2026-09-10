@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -45,7 +46,7 @@ fun LogInScreen(
     var userPassword by viewModel.userPassword
     var showError by viewModel.showError
     var errorMessage by viewModel.errorMessage
-    val visible by viewModel.visible
+    var visible by viewModel.visible
 
     val icon = if (visible) R.drawable.visibility else R.drawable.visible
 
@@ -140,7 +141,15 @@ fun LogInScreen(
                         contentDescription = null,
                         modifier = Modifier.size(20.dp), tint = Color.Gray
                     )
-                }, modifier = Modifier.fillMaxWidth()
+                }, modifier = Modifier.fillMaxWidth(),
+                textColor = Color.Gray,
+                containerColor = Color.Transparent,
+                cursorColor = Color(0xff4392f9),
+                focusedIndicatorColor = Color(0xff4392f9),
+                unfocusedIndicatorColor = Color.Gray,
+                disabledIndicatorColor = Color.Transparent,
+                singleLine = true
+
             )
 
             Spacer(Modifier.height(20.dp))
@@ -157,7 +166,7 @@ fun LogInScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
-                    IconButton(onClick = { visible != visible }) {
+                    IconButton(onClick = { visible = !visible }) {
                         Icon(
                             painter = painterResource(icon),
                             contentDescription = null,
@@ -165,7 +174,14 @@ fun LogInScreen(
                         )
                     }
                 },
-                visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
+                visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
+                textColor = Color.Gray,
+                containerColor = Color.Transparent,
+                cursorColor = Color(0xff4392f9),
+                focusedIndicatorColor = Color(0xff4392f9),
+                unfocusedIndicatorColor = Color.Gray,
+                disabledIndicatorColor = Color.Transparent,
+                singleLine = true
             )
 
             Spacer(Modifier.height(10.dp))
@@ -218,7 +234,7 @@ fun LogInScreen(
             ) {
                 Surface(
                     modifier = Modifier
-                        .size(60.dp)
+                        .size(60.dp).clip(CircleShape)
                         .clickable(onClick = {
                             val googleSignInClient =
                                 GoogleSignInHelper.getGoogleSignInClient(context)

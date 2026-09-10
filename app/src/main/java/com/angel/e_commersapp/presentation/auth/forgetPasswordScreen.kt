@@ -16,8 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,16 +32,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.angel.e_commersapp.navigation.Routes
 
 @Composable
-fun ForgotPasswordScreen(NavHostController: NavHostController) {
+fun ForgotPasswordScreen(navController: NavController) {
     var userForgotEmail by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize().background(Color.White)
             .padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
@@ -52,7 +52,7 @@ fun ForgotPasswordScreen(NavHostController: NavHostController) {
                 fontSize = 42.sp,
                 fontWeight = FontWeight.Black,
                 modifier = Modifier.padding(start = 15.dp),
-                letterSpacing = 0.5.sp
+                letterSpacing = 0.5.sp, color = Color.Black
             )
         }
 
@@ -67,12 +67,12 @@ fun ForgotPasswordScreen(NavHostController: NavHostController) {
                     .clip(shape = RoundedCornerShape(10.dp))
                     .border(
                         shape = RoundedCornerShape(10.dp),
-                        color = Color(0xFFB2B2B2),
-                        width = 2.dp
+                        color =  Color(0xff4392f9),
+                        width = 1.dp
                     )
-                    .height(70.dp)
+                    .height(60.dp)
                     .fillMaxWidth()
-                    .background(color = Color(0xFFF3F3F3))
+                    .background(color = Color.White)
             ) {
                 Icon(
                     Icons.Default.Email,
@@ -80,9 +80,9 @@ fun ForgotPasswordScreen(NavHostController: NavHostController) {
                     modifier = Modifier
                         .padding(start = 15.dp)
                         .align(Alignment.CenterStart)
-                        .size(25.dp)
+                        .size(25.dp), tint = Color.Gray
                 )
-                TextField(
+                OutlinedTextField(
                     value = userForgotEmail,
                     onValueChange = { userForgotEmail = it },
                     modifier = Modifier
@@ -90,13 +90,21 @@ fun ForgotPasswordScreen(NavHostController: NavHostController) {
                         .fillMaxSize(),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        cursorColor = Color(0xff4392f9),
+                        focusedTextColor = Color.Gray,
+                        unfocusedTextColor = Color.Gray,
+                        disabledTextColor = Color.Gray,
+
+
                     ),
                     singleLine = true,
                     placeholder = {
                         Text(
                             text = "Enter your e-mail address ",
-                            fontSize = 14.sp
+                            fontSize = 14.sp, color = Color.Gray
                         )
                     },
                     textStyle = TextStyle(
@@ -126,7 +134,7 @@ fun ForgotPasswordScreen(NavHostController: NavHostController) {
                     .fillMaxWidth()
                     .background(Color(0xFF8817C6))
                     .clickable {
-                        NavHostController.navigate(Routes.LoginScreen)
+                        navController.navigate(Routes.LoginScreen)
                     }
             ) {
                 Text(

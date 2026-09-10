@@ -121,14 +121,14 @@ fun SettingsScreen(
                     Text(
                         text = "Checkout",
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium, color = Color.Black
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Back", tint = Color.Black
                         )
                     }
                 },

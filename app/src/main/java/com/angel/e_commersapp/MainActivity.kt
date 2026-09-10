@@ -18,9 +18,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ECommersAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AppNavigation()
-                }
             }
         }
     }

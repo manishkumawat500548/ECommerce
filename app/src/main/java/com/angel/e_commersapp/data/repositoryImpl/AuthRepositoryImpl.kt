@@ -28,7 +28,7 @@ class AuthRepositoryImpl(private val firebaseAuth: FirebaseAuth) : AuthRepositor
     ): Result<String> {
         return try {
             firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            firebaseAuth.signOut()
+//            firebaseAuth.signOut()
             Result.Success("SignUp Successfully")
 
         } catch (e: Exception) {

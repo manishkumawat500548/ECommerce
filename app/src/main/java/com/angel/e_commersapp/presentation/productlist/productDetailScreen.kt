@@ -59,6 +59,10 @@ import coil3.request.crossfade
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import android.widget.Toast
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.draw.scale
 import com.angel.e_commersapp.data.remote.dto.Product
 import com.angel.e_commersapp.presentation.cart.CartViewModel
 import com.angel.e_commersapp.presentation.productlist.components.StarRating
@@ -79,6 +83,17 @@ fun ProductDetailScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     var isFavorite by remember { mutableStateOf(false) }
+
+    val color by animateColorAsState(
+        targetValue = if (isFavorite) Color.Red else Color.Black,
+        animationSpec = tween(durationMillis = 300)
+    )
+
+    val scale by animateFloatAsState(
+        targetValue = if (isFavorite) 1.3f else 1.1f,
+        animationSpec = tween(200),
+        label = "heartScale"
+    )
 
     // Check if product is in wishlist
     LaunchedEffect(productId) {
@@ -113,17 +128,17 @@ fun ProductDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Product Details") },
+                title = { Text("Product Details", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.Black)
                     }
                 },
                 actions = {
                     IconButton(onClick = {
                         product?.let { shareProduct(it) }
                     }) {
-                        Icon(Icons.Default.Share, contentDescription = "Share")
+                        Icon(Icons.Default.Share, contentDescription = "Share", tint = Color.Black)
                     }
                     IconButton(onClick = {
                         product?.let { prod ->
@@ -141,7 +156,7 @@ fun ProductDetailScreen(
                         Icon(
                             if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                             contentDescription = "Favorite",
-                            tint = if (isFavorite) Color.Red else Color.Gray
+                            tint = color, modifier = Modifier.scale(scale)
                         )
                     }
                 },
@@ -174,6 +189,7 @@ fun ProductDetailScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(Color.White)
                         .padding(paddingValues)
                         .verticalScroll(rememberScrollState())
                 ) {
@@ -224,7 +240,8 @@ fun ProductImageGallery(
                 .height(300.dp)
                 .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
             SubcomposeAsyncImage(
                 model = ImageRequest.Builder(context)
@@ -271,7 +288,7 @@ fun ProductImageGallery(
                             .clip(RoundedCornerShape(8.dp)),
                         colors = CardDefaults.cardColors(
                             containerColor = if (index == selectedImageIndex)
-                                Color(0xFF4285F4).copy(alpha = 0.1f) else Color.White
+                                Color(0xff4392f9).copy(alpha = 0.1f) else Color.White
                         ),
                         onClick = { onImageSelected(index) }
                     ) {
@@ -312,7 +329,7 @@ private fun ProductDetailsSection(product: Product) {
             Text(
                 text = product.brand,
                 fontSize = 14.sp,
-                color = Color(0xFF4285F4),
+                color = Color(0xff4392f9),
                 fontWeight = FontWeight.Medium
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -335,7 +352,12 @@ private fun ProductDetailsSection(product: Product) {
             StarRating(rating = product.rating, starSize = 20.dp)
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "${String.format("%.1f", product.rating)} (${(product.rating * 100).toInt()} reviews)",
+                text = "${
+                    String.format(
+                        "%.1f",
+                        product.rating
+                    )
+                } (${(product.rating * 100).toInt()} reviews)",
                 fontSize = 14.sp,
                 color = Color.Gray
             )
@@ -427,7 +449,7 @@ private fun AddToCartSection(
                 .height(56.dp),
             enabled = product.stock > 0,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF4285F4),
+                containerColor = Color(0xff4392f9),
                 disabledContainerColor = Color.Gray
             ),
             shape = RoundedCornerShape(12.dp)

@@ -1,5 +1,6 @@
 package com.angel.e_commersapp.presentation.signupscreen
 
+import android.util.Patterns
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -40,8 +41,10 @@ fun SignUpScreen(
     var userPassword by viewModel.userPassword
     var userConfPassword by viewModel.userConfPassword
     var errorMessage by viewModel.errorMessage
-    val visible by viewModel.visible
+    var visible by remember { mutableStateOf(false) }
+    var visible1 by remember { mutableStateOf(false) }
     val icon = if (visible) R.drawable.visibility else R.drawable.visible
+    val icon1 = if (visible1) R.drawable.visibility else R.drawable.visible
 
     val authState by authViewModel.authState.collectAsState()
 
@@ -97,7 +100,14 @@ fun SignUpScreen(
                         contentDescription = null,
                         modifier = Modifier.size(20.dp), tint = Color.Gray
                     )
-                }, modifier = Modifier.fillMaxWidth()
+                },
+                modifier = Modifier.fillMaxWidth(), singleLine = true,
+                textColor = Color.Gray,
+                containerColor = Color.Transparent,
+                cursorColor = Color(0xff4392f9),
+                focusedIndicatorColor = Color(0xff4392f9),
+                unfocusedIndicatorColor = Color.Gray,
+                disabledIndicatorColor = Color.Transparent,
             )
 
             Spacer(Modifier.height(20.dp))
@@ -114,7 +124,7 @@ fun SignUpScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
-                    IconButton(onClick = { viewModel.visible.value = !viewModel.visible.value }) {
+                    IconButton(onClick = { visible = !visible }) {
                         Icon(
                             painter = painterResource(icon),
                             contentDescription = null,
@@ -122,6 +132,13 @@ fun SignUpScreen(
                         )
                     }
                 },
+                singleLine = true,
+                textColor = Color.Gray,
+                containerColor = Color.Transparent,
+                cursorColor = Color(0xff4392f9),
+                focusedIndicatorColor = Color(0xff4392f9),
+                unfocusedIndicatorColor = Color.Gray,
+                disabledIndicatorColor = Color.Transparent,
                 visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
             )
             Spacer(Modifier.height(20.dp))
@@ -139,15 +156,21 @@ fun SignUpScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
-                    IconButton(onClick = { visible != visible }) {
+                    IconButton(onClick = { visible1 = !visible1 }) {
                         Icon(
-                            painter = painterResource(icon),
+                            painter = painterResource(icon1),
                             contentDescription = null,
                             modifier = Modifier.size(20.dp), tint = Color.Gray
                         )
                     }
-                },
-                visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation()
+                }, singleLine = true,
+                textColor = Color.Gray,
+                containerColor = Color.Transparent,
+                cursorColor = Color(0xff4392f9),
+                focusedIndicatorColor = Color(0xff4392f9),
+                unfocusedIndicatorColor = Color.Gray,
+                disabledIndicatorColor = Color.Transparent,
+                visualTransformation = if (visible1) VisualTransformation.None else PasswordVisualTransformation()
             )
 
 
@@ -176,6 +199,8 @@ fun SignUpScreen(
                         errorMessage = "Email is required"
                     } else if (userPassword.isBlank()) {
                         errorMessage = "Password is required"
+                    } else if (!Patterns.EMAIL_ADDRESS.matcher(userNameAndEmail).matches()) {
+                        errorMessage = "Enter a valid email address"
                     } else if (userConfPassword.isBlank()) {
                         errorMessage = "Confirm password is required"
                     } else if (userPassword != userConfPassword) {
@@ -231,7 +256,8 @@ fun SignUpScreen(
                     "Login",
                     textDecoration = TextDecoration.Underline,
                     color = blue,
-                    fontSize = 16.sp
+                    fontSize = 16.sp, modifier = Modifier.clickable(onClick = {navController.navigate(
+                        Routes.LoginScreen)})
                 )
             }
         }
