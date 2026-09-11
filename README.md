@@ -64,6 +64,18 @@ UI improvements include:
 | **Android SDK**             | Android development          |
 
 
+
+## 📱 Screenshots
+
+| Mobile Number                          | OTP                            | Chat                            |
+| ----------------------------- | ----------------------------------- | ----------------------------------- |
+| ![Home Screen](screenshots/mobileNumScreen.jpg) | ![Workout Screen](screenshots/OTPScreen.jpg) | ![History Screen](screenshots/chatScreen.jpg) |
+
+| Profile                             | Call                                                        | Update
+| ----------------------------------- | ----------------------------------------- |  ----------------------------------------- | 
+| ![Profile Screen](screenshots/profileScreen.jpg) | ![WorkoutDetail](screenshots/callScreen.jpg) | ![WorkoutDetail](screenshots/updateScreen.jpg) |
+
+
 ## 🎯 What I Practiced
 
 This project helped me practice:
