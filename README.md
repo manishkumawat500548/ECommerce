@@ -5,13 +5,13 @@ A modern **E-Commerce Android application** built with **Kotlin and Jetpack Comp
 
 ## 📱 Screenshots
 
-| Mobile Number                          | OTP                            | Chat                            |
+| LogIn                          | Home                           | WishList                           |
 | ----------------------------- | ----------------------------------- | ----------------------------------- |
-| ![Home Screen](screenshots/mobileNumScreen.jpg) | ![Workout Screen](screenshots/OTPScreen.jpg) | ![History Screen](screenshots/chatScreen.jpg) |
+| ![Home Screen](screenshots/login.jpg) | ![Workout Screen](screenshots/home.jpg) | ![History Screen](screenshots/wishlist.jpg) |
 
-| Profile                             | Call                                                        | Update
+| Cart                             | Search                                                       | Profile
 | ----------------------------------- | ----------------------------------------- |  ----------------------------------------- | 
-| ![Profile Screen](screenshots/profileScreen.jpg) | ![WorkoutDetail](screenshots/callScreen.jpg) | ![WorkoutDetail](screenshots/updateScreen.jpg) |
+| ![Profile Screen](screenshots/cart.jpg) | ![WorkoutDetail](screenshots/search.jpg) | ![WorkoutDetail](screenshots/profile.jpg) |
 
 
 ## ✨ Features
