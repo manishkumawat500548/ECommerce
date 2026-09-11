@@ -2,6 +2,18 @@
 
 A modern **E-Commerce Android application** built with **Kotlin and Jetpack Compose**, featuring Firebase Authentication, product sharing, smooth animations, API integration, and a clean shopping experience.
 
+
+## 📱 Screenshots
+
+| Mobile Number                          | OTP                            | Chat                            |
+| ----------------------------- | ----------------------------------- | ----------------------------------- |
+| ![Home Screen](screenshots/mobileNumScreen.jpg) | ![Workout Screen](screenshots/OTPScreen.jpg) | ![History Screen](screenshots/chatScreen.jpg) |
+
+| Profile                             | Call                                                        | Update
+| ----------------------------------- | ----------------------------------------- |  ----------------------------------------- | 
+| ![Profile Screen](screenshots/profileScreen.jpg) | ![WorkoutDetail](screenshots/callScreen.jpg) | ![WorkoutDetail](screenshots/updateScreen.jpg) |
+
+
 ## ✨ Features
 
 * 🏠 Modern and responsive Home screen
@@ -62,18 +74,6 @@ UI improvements include:
 | **DataStore**               | Local preferences            |
 | **Navigation**              | Screen navigation            |
 | **Android SDK**             | Android development          |
-
-
-
-## 📱 Screenshots
-
-| Mobile Number                          | OTP                            | Chat                            |
-| ----------------------------- | ----------------------------------- | ----------------------------------- |
-| ![Home Screen](screenshots/mobileNumScreen.jpg) | ![Workout Screen](screenshots/OTPScreen.jpg) | ![History Screen](screenshots/chatScreen.jpg) |
-
-| Profile                             | Call                                                        | Update
-| ----------------------------------- | ----------------------------------------- |  ----------------------------------------- | 
-| ![Profile Screen](screenshots/profileScreen.jpg) | ![WorkoutDetail](screenshots/callScreen.jpg) | ![WorkoutDetail](screenshots/updateScreen.jpg) |
 
 
 ## 🎯 What I Practiced
