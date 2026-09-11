@@ -1,5 +1,6 @@
 package com.angel.e_commersapp.presentation.cart
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -51,8 +52,7 @@ fun CartScreen(
                 title = {
                     Text(
                         text = "My Cart",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
+                        fontSize = 20.sp, color = Color.Black
                     )
                 },
                 navigationIcon = {
@@ -268,7 +268,8 @@ fun CartItemCard(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    color = Color.Gray
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -336,6 +337,7 @@ fun CartItemCard(
                         Text(
                             text = cartItem.quantity.toString(),
                             fontSize = 16.sp,
+                            color = Color.Gray,
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier.padding(horizontal = 12.dp)
                         )

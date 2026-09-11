@@ -90,8 +90,8 @@ fun BottomBar(currentRoute: String, onClick: (BottomItem) -> Unit) {
 
 @Composable
 fun BottomNavItemView(item: BottomItem, isSelected: Boolean, onClick: () -> Unit) {
-    val iconTint = if (isSelected) Color(0xfff83758) else Color.Gray
-    val textColor = if (isSelected) Color(0xfff83758) else Color.Gray
+    val iconTint = if (isSelected)  Color(0xff4392f9) else Color.Gray
+    val textColor = if (isSelected)  Color(0xff4392f9) else Color.Gray
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

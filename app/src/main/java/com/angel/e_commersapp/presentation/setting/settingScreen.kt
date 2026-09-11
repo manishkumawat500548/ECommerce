@@ -413,7 +413,8 @@ fun SettingsTextField(
                 focusedIndicatorColor = Color(0xFFE0E0E0),
                 unfocusedIndicatorColor = Color(0xFFE0E0E0),
                 disabledIndicatorColor = Color(0xFFE0E0E0),
-                disabledTextColor = Color.Gray
+                disabledTextColor = Color.Gray,
+                focusedTextColor = Color.Gray
             ),
             shape = RoundedCornerShape(8.dp)
         )
