@@ -1,12 +1,14 @@
 # 🛒 E-Commerce Android App
 
-A modern **E-Commerce Android application** built with **Kotlin and Jetpack Compose**, featuring Firebase Authentication, smooth animations, API integration, and a clean shopping experience.
+A modern **E-Commerce Android application** built with **Kotlin and Jetpack Compose**, featuring Firebase Authentication, product sharing, smooth animations, API integration, and a clean shopping experience.
 
 ## ✨ Features
 
 * 🏠 Modern and responsive Home screen
 * 🔍 Product search
 * 🛍️ Browse products
+* 📄 Product details
+* 🔗 Share products with other apps
 * ❤️ Wishlist functionality
 * 🛒 Add and manage products in Cart
 * 👤 User Profile
@@ -16,6 +18,7 @@ A modern **E-Commerce Android application** built with **Kotlin and Jetpack Comp
 * 🔄 MVVM-based state management
 * 💾 Local data persistence
 * 📱 Responsive UI for different screen sizes
+
 
 ## 🔐 Authentication
 
